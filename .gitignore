@@ -8,9 +8,6 @@ dist/
 build/
 
 # Results
-results/*.png
-results/*.html
-results/*.txt
 !results/.gitkeep
 
 # Jupyter
