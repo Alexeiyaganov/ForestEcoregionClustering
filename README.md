@@ -3,11 +3,13 @@
 > Воспроизведение методологии кластеризации лесных ландшафтов России  
 > По статье: Kharitonova et al. (2025) — Doklady Earth Sciences
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Alexeiyaganov/ForestEcoregionClustering/blob/main/colab_setup.ipynb)
+**Автор:** Алексей Яганов  
+**Email:** btls3@yandex.ru  
+**GitHub:** [Alexeiyaganov](https://github.com/Alexeiyaganov)
 
 ---
 
-## О проекте
+## Что это?
 
 Этот проект воспроизводит подход к районированию лесных территорий, описанный в статье:
 
@@ -19,96 +21,34 @@
 **Что сделано:**
 - Воспроизведена логика многомерной кластеризации (12 переменных)
 - Данные приведены к сетке ~250 м
-- Выделены экорегионы для европейской части России
-- Построены карты и метрики качества
+- Выделены экорегионы для европейской части России (18 штук)
+- Построены карты и рассчитаны метрики качества
 
 ---
 
-## Быстрый старт в Google Colab
+## Как запустить в Google Colab (пошаговая инструкция)
 
-### Шаг 1. Открыть ноутбук
+### Шаг 1. Откройте Google Colab
 
-Нажмите на зелёную кнопку **Open In Colab** выше.
+Перейдите по ссылке: https://colab.research.google.com/
 
-Или вручную:
-1. Перейдите на https://colab.research.google.com/
-2. Выберите **GitHub** вкладку
-3. Вставьте ссылку: `https://github.com/Alexeiyaganov/ForestEcoregionClustering`
-4. Выберите `colab_setup.ipynb`
+### Шаг 2. Создайте новый ноутбук
 
-### Шаг 2. Запустить все ячейки
+Нажмите **Файл → Создать новый блокнот** (или `Ctrl + N`)
 
-В меню Colab: **Runtime → Run all** (или нажмите `Ctrl+F9`)
+### Шаг 3. Скопируйте код в первую ячейку
 
-### Шаг 3. Дождаться выполнения
+В появившуюся ячейку вставьте этот код:
 
-Процесс занимает 2-3 минуты. Вы увидите:
-- Установку библиотек
-- Генерацию данных
-- Кластеризацию
-- Построение графиков
+```python
+# Клонируем репозиторий с проектом
+!git clone https://github.com/Alexeiyaganov/ForestEcoregionClustering.git
 
-### Шаг 4. Скачать результаты
+# Переходим в папку проекта
+%cd ForestEcoregionClustering
 
-В последней ячейке ноутбука нажмите на ссылки для скачивания:
-- `ecoregion_maps.png` — карта экорегионов
-- `elbow_method.png` — график выбора числа кластеров
-- `ecoregions_interactive.html` — интерактивная карта
-- `results_summary.txt` — метрики качества
+# Устанавливаем необходимые библиотеки
+!pip install -q -r requirements.txt
 
----
-
-## Локальный запуск
-
-```bash
-# Клонировать репозиторий
-git clone https://github.com/Alexeiyaganov/ForestEcoregionClustering.git
-cd ForestEcoregionClustering
-
-# Установить зависимости
-pip install -r requirements.txt
-
-# Запустить скрипт
-python run_clustering.py
-Результаты появятся в папке results/
-
-Результаты (синтетические данные)
-Метрика	Значение
-Число экорегионов	18
-Силуэт-коэффициент	~0.10
-Объяснённая дисперсия (PC1-3)	~66%
-Adjusted Rand Index	~0.12
-Эти результаты — baseline на синтетических данных. Низкий силуэт согласуется с наблюдениями авторов для северо-восточной Сибири (SS = –0.01 до 0.03).
-
-Что дальше (предлагаемые улучшения)
-Реальные данные — CHELSA (климат), MERIT DEM (рельеф), SoilGrids (почвы), MODIS (NDVI)
-
-Высокое разрешение — 30 м вместо 250 м
-
-Микрорельеф — добавление экспозиции и TWI
-
-SLIC вместо KMeans — учёт пространственной связности
-
-Динамика — кластеризация по годам (2000-2025)
-
-MLOps-пайплайн — DVC + MLflow + CI/CD
-
-Структура репозитория
-text
-ForestEcoregionClustering/
-├── README.md              # Этот файл
-├── LICENSE                # MIT лицензия
-├── requirements.txt       # Зависимости Python
-├── run_clustering.py      # Основной скрипт
-├── colab_setup.ipynb      # Обёртка для Google Colab
-└── results/               # Папка для результатов
-Автор
-Алексей Яганов
-
-MLOps Engineer / Data Scientist
-
-Мастер спорта по спортивному ориентированию
-
-Email: btls3@yandex.ru
-
-GitHub: Alexeiyaganov
+# Запускаем основной скрипт
+!python run_clustering.py
